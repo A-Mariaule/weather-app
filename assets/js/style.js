@@ -7,10 +7,21 @@ h2.className="header__subtitle"
 header.appendChild(h2)
 
 //préparation de la météo
+let main__header=document.createElement("div")
+main__header.className="main__header"
+main.appendChild(main__header)
+let main__average=document.createElement("p")
+main__average.className="main__header--average"
+main__header.appendChild(main__average)
+let main__description=document.createElement("p")
+main__description.className="main__header--description"
+main__header.appendChild(main__description)
+
+
 let main__listHeure=document.createElement("div")
 main__listHeure.className="main__listHeure"
 main.appendChild(main__listHeure)
-let main__listButton=document.createElement("div")
+let header__listButton=document.createElement("div")
 
 //calcul du nombre d'heure nécessaire
 var date=new Date()
@@ -26,7 +37,7 @@ today=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
 //creation de la météo
 button.addEventListener("click",()=>{
     main__listHeure.innerHTML=""
-    main__listButton.innerHTML=""
+    header__listButton.innerHTML=""
     let input=document.querySelector("input")
     city=input.value
     const fetchName = (city) => fetch("https://api.openweathermap.org/data/2.5/forecast?q="+ city+"&cnt="+total_number+"&units=metric&appid=1cdbc48903d1d699f34e221b79e38af7");
@@ -58,81 +69,114 @@ button.addEventListener("click",()=>{
             temperature.className="meteo__temperature"
             meteo.appendChild(temperature)
             temperature.textContent=(elem.main.temp).toFixed(0)+ " ° "
+
             let wind=document.createElement("p")
             wind.className="meteo__wind"
             wind.textContent=(elem.wind.speed*3.6).toFixed(0)+" km/h"
             meteo.appendChild(wind)
-            if(meteo.classList.contains(today)){
-                meteo.style.display="block"
-            }
         }
+        //gestion climat
+        let meteo_description=document.getElementsByClassName("meteo__description")[0].textContent
+        var climat=meteo_description
         //create button
-        main__listButton.classList="main__listButton"
-        main.insertBefore(main__listButton,main__listHeure)
+        header__listButton.classList="header__listButton"
+        header.appendChild(header__listButton)
         let button_day1=document.createElement("button")
         button_day1.className=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate())
         button_day1.textContent=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate())
-        main__listButton.appendChild(button_day1)
+        header__listButton.appendChild(button_day1)
         button_day1.style.display="block"
         button_day1.addEventListener("click",()=>{
+            document.getElementsByClassName("main__header--description")[0].textContent=climat
+            document.getElementsByClassName("main__header--average")[0].innerHTML=" "
+            let average1=0
             for(let elem of main__listHeure.children){
                 elem.style.display="none"
                 if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()))){
-                    elem.style.display="block"
+                    elem.style.display="block"                    
+                    average1=average1+Number(elem.children[3].textContent.slice(0,-2))
                 }
             }
+            average1=(average1/3).toFixed(0)
+            document.getElementsByClassName("main__header--average")[0].textContent=average1+ "°C"
         })
         let button_day2=document.createElement("button")
         button_day2.className=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1)
         button_day2.textContent=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1)
-        main__listButton.appendChild(button_day2)
+        header__listButton.appendChild(button_day2)
         button_day2.style.display="block"
         button_day2.addEventListener("click",()=>{
+            document.getElementsByClassName("main__header--description")[0].textContent=climat
+            document.getElementsByClassName("main__header--average")[0].innerHTML=" "
+            let average2=0
             for(let elem of main__listHeure.children){
                 elem.style.display="none"
                 if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1))){
                     elem.style.display="block"
+                    average2=average2+Number(elem.children[3].textContent.slice(0,-2))
                 }
             }
+            average2=(average2/8).toFixed(0)
+            document.getElementsByClassName("main__header--average")[0].textContent=average2+ "°C"
         })
         let button_day3=document.createElement("button")
         button_day3.className=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+2)
         button_day3.textContent=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+2)
-        main__listButton.appendChild(button_day3)
+        header__listButton.appendChild(button_day3)
         button_day3.style.display="block"
         button_day3.addEventListener("click",()=>{
+            document.getElementsByClassName("main__header--description")[0].textContent=climat
+            document.getElementsByClassName("main__header--average")[0].innerHTML=" "
+            let average3=0
             for(let elem of main__listHeure.children){
                 elem.style.display="none"
                 if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+2))){
                     elem.style.display="block"
+                    average3=average3+Number(elem.children[3].textContent.slice(0,-2))
                 }
             }
+            average3=(average3/8).toFixed(0)
+            document.getElementsByClassName("main__header--average")[0].textContent=average3+ "°C"
         })
         let button_day4=document.createElement("button")
         button_day4.className=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+3)
         button_day4.textContent=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+3)
-        main__listButton.appendChild(button_day4)
+        header__listButton.appendChild(button_day4)
         button_day4.style.display="block"
         button_day4.addEventListener("click",()=>{
+            document.getElementsByClassName("main__header--description")[0].textContent=climat
+            document.getElementsByClassName("main__header--average")[0].innerHTML=" "
+            let average4=0
             for(let elem of main__listHeure.children){
                 elem.style.display="none"
                 if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+3))){
                     elem.style.display="block"
+                    average4=average4+Number(elem.children[3].textContent.slice(0,-2))
                 }
             }
+            average4=(average4/8).toFixed(0)
+            document.getElementsByClassName("main__header--average")[0].textContent=average4+ "°C"
         })
         let button_day5=document.createElement("button")
         button_day5.className=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+4)
         button_day5.textContent=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+4)
-        main__listButton.appendChild(button_day5)
+        header__listButton.appendChild(button_day5)
         button_day5.style.display="block"
-        button_day5.addEventListener("click",()=>{
+        button_day5.addEventListener("click",()=>{document.getElementsByClassName("main__header--description")[0].textContent=climat
+            document.getElementsByClassName("main__header--average")[0].innerHTML=" "
+            let average5=0
             for(let elem of main__listHeure.children){
                 elem.style.display="none"
                 if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+4))){
                     elem.style.display="block"
+                    average5=average5+Number(elem.children[3].textContent.slice(0,-2))
                 }
             }
+            average5=(average5/8).toFixed(0)
+            document.getElementsByClassName("main__header--average")[0].textContent=average5+ "°C"
         })
     })
 })
+
+
+
