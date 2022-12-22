@@ -7,17 +7,29 @@ h2.className="header__subtitle"
 header.appendChild(h2)
 
 //préparation de la météo
-let list_meteo=document.createElement("div")
-list_meteo.className="list_meteo"
-main.appendChild(list_meteo)
+let main__listHeure=document.createElement("div")
+main__listHeure.className="main__listHeure"
+main.appendChild(main__listHeure)
+let main__listButton=document.createElement("div")
+
+//calcul du nombre d'heure nécessaire
+var date=new Date()
+var heure_rest=24-date.getHours()
+var number_time=Math.floor(heure_rest/3)
+var total_number=number_time+32
+today=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
+
+
+
 
 
 //creation de la météo
 button.addEventListener("click",()=>{
-    list_meteo.innerHTML=""
+    main__listHeure.innerHTML=""
+    main__listButton.innerHTML=""
     let input=document.querySelector("input")
     city=input.value
-    const fetchName = (city) => fetch("https://api.openweathermap.org/data/2.5/forecast?q="+ city+"&cnt=8&units=metric&appid=1cdbc48903d1d699f34e221b79e38af7");
+    const fetchName = (city) => fetch("https://api.openweathermap.org/data/2.5/forecast?q="+ city+"&cnt="+total_number+"&units=metric&appid=1cdbc48903d1d699f34e221b79e38af7");
     fetchName(city)
     .then((response)=>response.json())
     .then((json)=>{
@@ -28,9 +40,10 @@ button.addEventListener("click",()=>{
         for (let elem of data.list){
             let meteo=document.createElement("div")
             meteo.className="meteo"
-            list_meteo.appendChild(meteo)
+            main__listHeure.appendChild(meteo)
             let heure=document.createElement("p")
             heure.className="meteo__heure"
+            meteo.classList.add(elem.dt_txt.split(" ")[0])
             meteo.appendChild(heure)
             heure.textContent=elem.dt_txt.split(" ")[1].substring(0,5);
             let logo=document.createElement("img")
@@ -49,6 +62,77 @@ button.addEventListener("click",()=>{
             wind.className="meteo__wind"
             wind.textContent=(elem.wind.speed*3.6).toFixed(0)+" km/h"
             meteo.appendChild(wind)
+            if(meteo.classList.contains(today)){
+                meteo.style.display="block"
+            }
         }
+        //create button
+        main__listButton.classList="main__listButton"
+        main.insertBefore(main__listButton,main__listHeure)
+        let button_day1=document.createElement("button")
+        button_day1.className=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate())
+        button_day1.textContent=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate())
+        main__listButton.appendChild(button_day1)
+        button_day1.style.display="block"
+        button_day1.addEventListener("click",()=>{
+            for(let elem of main__listHeure.children){
+                elem.style.display="none"
+                if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()))){
+                    elem.style.display="block"
+                }
+            }
+        })
+        let button_day2=document.createElement("button")
+        button_day2.className=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1)
+        button_day2.textContent=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1)
+        main__listButton.appendChild(button_day2)
+        button_day2.style.display="block"
+        button_day2.addEventListener("click",()=>{
+            for(let elem of main__listHeure.children){
+                elem.style.display="none"
+                if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1))){
+                    elem.style.display="block"
+                }
+            }
+        })
+        let button_day3=document.createElement("button")
+        button_day3.className=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+2)
+        button_day3.textContent=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+2)
+        main__listButton.appendChild(button_day3)
+        button_day3.style.display="block"
+        button_day3.addEventListener("click",()=>{
+            for(let elem of main__listHeure.children){
+                elem.style.display="none"
+                if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+2))){
+                    elem.style.display="block"
+                }
+            }
+        })
+        let button_day4=document.createElement("button")
+        button_day4.className=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+3)
+        button_day4.textContent=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+3)
+        main__listButton.appendChild(button_day4)
+        button_day4.style.display="block"
+        button_day4.addEventListener("click",()=>{
+            for(let elem of main__listHeure.children){
+                elem.style.display="none"
+                if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+3))){
+                    elem.style.display="block"
+                }
+            }
+        })
+        let button_day5=document.createElement("button")
+        button_day5.className=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+4)
+        button_day5.textContent=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+4)
+        main__listButton.appendChild(button_day5)
+        button_day5.style.display="block"
+        button_day5.addEventListener("click",()=>{
+            for(let elem of main__listHeure.children){
+                elem.style.display="none"
+                if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+4))){
+                    elem.style.display="block"
+                }
+            }
+        })
     })
 })
