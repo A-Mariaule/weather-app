@@ -1,8 +1,10 @@
+//base
 *{
     margin: 0;
     padding:0;
 }
 
+//fonts
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
@@ -13,7 +15,10 @@ body{
     display: flex;
     flex-direction: column;
     text-align: center;
-    background-color: #57abf5;
+    background-image: url("../images/fluffy-clouds-windy-sky.jpg");
+    background-position: center;
+    background-size: cover;
+    //background-color: #57abf5;
     .header{
         display: flex;
         flex-direction: column;
@@ -55,6 +60,12 @@ body{
             button{
                 border: none;
                 font-family: "Montserrat", sans-serif;
+                border-radius: 2vw;
+                cursor: pointer;
+                &:hover{
+                    background-color: black;
+                    color: white;
+                }
             }
         }
     }
@@ -62,7 +73,7 @@ body{
         display: flex;
         flex-direction: column;
         text-align: center;
-        justify-content: center;
+        justify-content: space-around;
         width: 100%;
         height: 100%;
         color: #f1f1f1;
@@ -77,36 +88,44 @@ body{
             }
             &--description{
                 text-align: center;
-                margin-right: 5vw;
                 font-family: "Montserrat", sans-serif;
-                font-size: 5vw;
                 height: 40%;
+                opacity: 0.6;
             }
         }
         &__listHeure{
             display: flex;
             align-items: center;
+            justify-content: space-between;
             overflow: auto;
             font-family: "Montserrat", sans-serif;
-            background-color: rgba(255, 255, 255, 0.17);
+            color: black;
             .meteo{
                 display: none;
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
                 height: 100%;
-                margin-left: 2.5vw;
-                margin-right: 2.5vw;
+                margin-left: 2vw;
+                margin-right: 2vw;
+                background-color: rgba(255, 255, 255, 0.17);
+                border-radius: 2vw;
+                &__heure{
+                    color: black;
+                }
             }
         }
     }
 }
 
+
+//responsive
 @media screen and (max-width:480px){
     .header{
         &__listButton{
             button{
                 padding: 2vw;
+                width: 15%;
             }
         }
     }
@@ -129,6 +148,7 @@ body{
         &__listButton{
             button{
                 padding: 1vw;
+                width: 10%;
             }
         }
     }
@@ -150,6 +170,7 @@ body{
         &__listButton{
             button{
                 padding: 1vw;
+                width: 10%;
             }
         }
     }
@@ -160,8 +181,9 @@ body{
                 
             }
             &--description{
-                font-size: 5vw;
+                font-size: 3vw;
             }
         }
+        
     }
 }
