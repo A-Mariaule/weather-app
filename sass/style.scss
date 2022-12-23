@@ -3,6 +3,9 @@
     padding:0;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 
 body{
     width: 100vw;
@@ -10,13 +13,49 @@ body{
     display: flex;
     flex-direction: column;
     text-align: center;
+    background-color: #57abf5;
     .header{
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        &__listButton{
+        font-family: 'Playfair Display', serif;
+        color: #f1f1f1;
+        height:45%;
+        &__form{
             display: flex;
             justify-content: center;
+            &:after{
+                content: "";
+                clear: both;
+                display: table;
+            }
+            &--input{
+                border: 1px solid grey;
+                background: #f1f1f1;
+                padding: 1vw;
+                border-top-left-radius:2vw;
+                border-bottom-left-radius: 2vw;
+                border-right: none;
+            }
+            &--button{
+                padding: 1vw;
+                border: 1px solid grey;
+                background-color: black;
+                color: white;
+                border-left: none;
+                cursor: pointer;
+                border-top-right-radius:2vw;
+                border-bottom-right-radius: 2vw;
+                font-family: "Montserrat", sans-serif;
+            }
+        }
+        &__listButton{
+            display: flex;
+            justify-content: space-evenly;
+            button{
+                border: none;
+                font-family: "Montserrat", sans-serif;
+            }
         }
     }
     .main{
@@ -26,23 +65,103 @@ body{
         justify-content: center;
         width: 100%;
         height: 100%;
+        color: #f1f1f1;
         &__header{
-            height: 50%;
+            height: 33%;
             text-align: center;
             &--average{
                 text-align: center;
-                font-size: 20vw;
                 height: 60%;
+                font-family: 'Playfair Display', sans-serif;
+                
+            }
+            &--description{
+                text-align: center;
+                margin-right: 5vw;
+                font-family: "Montserrat", sans-serif;
+                font-size: 5vw;
+                height: 40%;
             }
         }
         &__listHeure{
             display: flex;
             align-items: center;
             overflow: auto;
-        }
+            font-family: "Montserrat", sans-serif;
+            background-color: rgba(255, 255, 255, 0.17);
             .meteo{
                 display: none;
-                width: 100%;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                height: 100%;
+                margin-left: 2.5vw;
+                margin-right: 2.5vw;
             }
         }
+    }
+}
+
+@media screen and (max-width:480px){
+    .header{
+        &__listButton{
+            button{
+                padding: 2vw;
+            }
+        }
+    }
+    .main{
+        &__header{
+            &--average{
+                font-size: 15vw;
+                
+            }
+            &--description{
+                font-size: 5vw;
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width:480px) and (max-width:768px){
+    .header{
+        &__listButton{
+            button{
+                padding: 1vw;
+            }
+        }
+    }
+    .main{
+        &__header{
+            &--average{
+                font-size: 10vw;
+                
+            }
+            &--description{
+                font-size: 5vw;
+            }
+        }
+    }
+}
+
+@media screen and (min-width:768px){
+    .header{
+        &__listButton{
+            button{
+                padding: 1vw;
+            }
+        }
+    }
+    .main{
+        &__header{
+            &--average{
+                font-size: 5vw;
+                
+            }
+            &--description{
+                font-size: 5vw;
+            }
+        }
+    }
 }
