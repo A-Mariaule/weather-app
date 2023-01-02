@@ -1,11 +1,11 @@
 //header
 let button=document.querySelector("button")
-let main=document.getElementsByClassName("main")[0]
 let header=document.getElementsByClassName("header")[0]
 let header__listButton=document.createElement("div")
 createElement("h2","header__subtitle",header)
 
 //creation du main__header
+let main=document.getElementsByClassName("main")[0]
 createElement("div","main__header",main)
 let main__header=document.getElementsByClassName("main__header")[0]
 createElement("p","main__header--average",main__header)
@@ -24,8 +24,7 @@ let number_time=Math.floor(heure_rest/3)
 let total_number=number_time+32
 
 //jour de la semaine
-var week=["Sun.","Mon.","Tue.","Wed.","Thu.","Fri.","Sat."]
-
+const week=["Sun.","Mon.","Tue.","Wed.","Thu.","Fri.","Sat."]
 
 
 //creation de la météo
@@ -43,20 +42,24 @@ button.addEventListener("click",()=>{
         data=JSON.parse(localStorage.getItem("data"))
         document.getElementsByClassName("header__subtitle")[0].textContent=data.city.name
         for (let elem of data.list){
+            //creation carte meteo
             let meteo=document.createElement("div")
             meteo.className="meteo"
             main__listHeure.appendChild(meteo)
             meteo.classList.add(elem.dt_txt.split(" ")[0])
+            //heure
             let heure = elem.dt_txt.split(" ")[1].substring(0,5)
             createElement("p","meteo__heure",meteo,heure)
-            let logo=document.createElement("img")
-            logo.className="meteo__logo "
-            meteo.appendChild(logo)
-            logo.src="http://openweathermap.org/img/wn/"+elem.weather[0].icon+"@2x.png"
+            //logo meteo
+            let source="http://openweathermap.org/img/wn/"+elem.weather[0].icon+"@2x.png"
+            createElementImg("meteo__logo",meteo,source)
+            //description meteo
             let description=elem.weather[0].description
             createElement("p","meteo__description",meteo,description)
+            //temperature
             let temperature=(elem.main.temp).toFixed(0)+ " ° "
             createElement("p","meteo__temperature",meteo,temperature)
+            //vent
             let wind=(elem.wind.speed*3.6).toFixed(0)+" km/h"
             createElement("p","meteo__wind",meteo,wind)
         }
@@ -79,6 +82,7 @@ button.addEventListener("click",()=>{
     })
 })
 
+//////////*Fonctions*//////////////////
 
 //creation bouton jour
 function CreateButton(date){
@@ -105,27 +109,11 @@ function CreateButton(date){
                 average=average+Number(elem.children[3].textContent.slice(0,-2))
             }
         }
-        let today=new Date()
-        if(today.getDate()==date.getDate()){
-            average=(average/number_time).toFixed(0)
-            document.getElementsByClassName("main__header--average")[0].textContent=average+ "°"
-        }
-        else{
-            average=(average/8).toFixed(0)
-            document.getElementsByClassName("main__header--average")[0].textContent=average+ "°"
-        }
+        displayAverage(average,date)
     })
 }
 
-//creation element 
-function createElement(tag,name,parent,content=""){
-    let item=document.createElement(tag)
-    item.className=name
-    parent.appendChild(item)
-    item.textContent=content
-}
-
-//description meteo
+//gestion description meteo
 function DescriptionMeteo(date){
     let today=new Date()
     if(today.getDate()==date.getDate()){
@@ -161,6 +149,32 @@ function newdate(date){
     }
 }
 
+// gestion average
+function displayAverage(average,date){
+    let today=new Date()
+    if(today.getDate()==date.getDate()){
+        average=(average/number_time).toFixed(0)
+        document.getElementsByClassName("main__header--average")[0].textContent=average+ "°"
+    }
+    else{
+        average=(average/8).toFixed(0)
+        document.getElementsByClassName("main__header--average")[0].textContent=average+ "°"
+    }
+}
 
+//creation element 
+function createElement(tag,name,parent,content=""){
+    let item=document.createElement(tag)
+    item.className=name
+    parent.appendChild(item)
+    item.textContent=content
+}
 
+//creation element img
+function createElementImg(name,parent,src){
+    let item=document.createElement("img")
+    item.className=name
+    parent.appendChild(item)
+    item.src=src
+}
 
