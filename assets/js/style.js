@@ -100,7 +100,7 @@ button.addEventListener("click",()=>{
             let average1=0
             for(let elem of main__listHeure.children){
                 elem.style.display="none"
-                if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()))){
+                if(elem.classList.contains(date.getFullYear()+"-"+"0"+(date.getMonth()+1)+"-"+"0"+(date.getDate()))){
                     elem.style.display="flex"                    
                     average1=average1+Number(elem.children[3].textContent.slice(0,-2))
                 }
@@ -127,7 +127,7 @@ button.addEventListener("click",()=>{
             let average2=0
             for(let elem of main__listHeure.children){
                 elem.style.display="none"
-                if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1))){
+                if(elem.classList.contains(date.getFullYear()+"-"+"0"+(date.getMonth()+1)+"-"+"0"+(date.getDate()+1))){
                     elem.style.display="flex"
                     average2=average2+Number(elem.children[3].textContent.slice(0,-2))
                 }
@@ -154,7 +154,7 @@ button.addEventListener("click",()=>{
             let average3=0
             for(let elem of main__listHeure.children){
                 elem.style.display="none"
-                if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+2))){
+                if(elem.classList.contains(date.getFullYear()+"-"+"0"+(date.getMonth()+1)+"-"+"0"+(date.getDate()+2))){
                     elem.style.display="flex"
                     average3=average3+Number(elem.children[3].textContent.slice(0,-2))
                 }
@@ -181,7 +181,7 @@ button.addEventListener("click",()=>{
             let average4=0
             for(let elem of main__listHeure.children){
                 elem.style.display="none"
-                if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+3))){
+                if(elem.classList.contains(date.getFullYear()+"-"+"0"+(date.getMonth()+1)+"-"+"0"+(date.getDate()+3))){
                     elem.style.display="flex"
                     average4=average4+Number(elem.children[3].textContent.slice(0,-2))
                 }
@@ -208,7 +208,7 @@ button.addEventListener("click",()=>{
             let average5=0
             for(let elem of main__listHeure.children){
                 elem.style.display="none"
-                if(elem.classList.contains(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+4))){
+                if(elem.classList.contains(date.getFullYear()+"-"+"0"+(date.getMonth()+1)+"-"+"0"+(date.getDate()+4))){
                     elem.style.display="flex"
                     average5=average5+Number(elem.children[3].textContent.slice(0,-2))
                 }
