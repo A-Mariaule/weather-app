@@ -1,5 +1,7 @@
+import {header__listButton,header,date,week,main__listHeure,number_time} from './index.js'
+
 //creation de tout les boutons
-function CreateButtons(){
+export function CreateButtons(){
     header__listButton.classList="header__listButton"
     header.appendChild(header__listButton)
     CreateOneButton(date)
@@ -18,7 +20,7 @@ function CreateButtons(){
 }
 
 //creation un bouton jour
-function CreateOneButton(date){
+export function CreateOneButton(date){
     let button_day=document.createElement("button")
     button_day.textContent=week[date.getDay()]
     header__listButton.appendChild(button_day)
@@ -47,7 +49,7 @@ function CreateOneButton(date){
 }
 
 //gestion description meteo
-function DescriptionMeteo(date){
+export function DescriptionMeteo(date){
     let today=new Date()
     if(today.getDate()==date.getDate()){
         document.getElementsByClassName("main__header--description")[0].textContent=document.getElementsByClassName("meteo__description")[0].textContent
@@ -67,7 +69,7 @@ function DescriptionMeteo(date){
 }
 
 //gestion date
-function newdate(date){
+export function newdate(date){
     if(date.getDate()<10 && date.getMonth()<10){
         return date.getFullYear()+"-"+"0"+(date.getMonth()+1)+"-"+"0"+(date.getDate())
     }
@@ -83,7 +85,7 @@ function newdate(date){
 }
 
 //gestion average
-function displayAverage(average,date){
+export function displayAverage(average,date){
     let today=new Date()
     if(today.getDate()==date.getDate()){
         average=(average/number_time).toFixed(0)

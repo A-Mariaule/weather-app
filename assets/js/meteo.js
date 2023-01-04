@@ -1,5 +1,9 @@
+import {createElement,createElementImg} from './CreationElements.js'
+import {main__listHeure} from './index.js'
+
+
 //creation meteo
-function meteo(data){
+export function meteo(data){
     for (let elem of data.list){
         //creation carte meteo
         let meteo=document.createElement("div")
