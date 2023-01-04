@@ -1,3 +1,7 @@
+//constantes
+const date=new Date()
+const week=["Sun.","Mon.","Tue.","Wed.","Thu.","Fri.","Sat."]
+
 //header
 let button=document.querySelector("button")
 let header=document.getElementsByClassName("header")[0]
@@ -18,13 +22,9 @@ let main__listHeure=document.getElementsByClassName("main__listHeure")[0]
 
 
 //calcul du nombre d'heures nécessaire
-const date=new Date()
 let heure_rest=24-date.getHours()
 let number_time=Math.floor(heure_rest/3)
 let total_number=number_time+32
-
-//jour de la semaine
-const week=["Sun.","Mon.","Tue.","Wed.","Thu.","Fri.","Sat."]
 
 
 //creation de la météo + ajout boutons
@@ -41,29 +41,9 @@ button.addEventListener("click",()=>{
         localStorage.setItem("data",JSON.stringify(json))
         data=JSON.parse(localStorage.getItem("data"))
         document.getElementsByClassName("header__subtitle")[0].textContent=data.city.name
-        for (let elem of data.list){
-            //creation carte meteo
-            let meteo=document.createElement("div")
-            meteo.className="meteo"
-            main__listHeure.appendChild(meteo)
-            meteo.classList.add(elem.dt_txt.split(" ")[0])
-            //heure
-            let heure = elem.dt_txt.split(" ")[1].substring(0,5)
-            createElement("p","meteo__heure",meteo,heure)
-            //logo meteo
-            let source="http://openweathermap.org/img/wn/"+elem.weather[0].icon+"@2x.png"
-            createElementImg("meteo__logo",meteo,source)
-            //description meteo
-            let description=elem.weather[0].description
-            createElement("p","meteo__description",meteo,description)
-            //temperature
-            let temperature=(elem.main.temp).toFixed(0)+ " ° "
-            createElement("p","meteo__temperature",meteo,temperature)
-            //vent
-            let wind=(elem.wind.speed*3.6).toFixed(0)+" km/h"
-            createElement("p","meteo__wind",meteo,wind)
-        }
-        //create button jour
+        //creation carte meteo
+        meteo(data)
+        //creation buton jour
         CreateButtons()
     })
 })
@@ -181,4 +161,30 @@ function createElementImg(name,parent,src){
     item.className=name
     parent.appendChild(item)
     item.src=src
+}
+
+//creation meteo
+function meteo(data){
+    for (let elem of data.list){
+        //creation carte meteo
+        let meteo=document.createElement("div")
+        meteo.className="meteo"
+        main__listHeure.appendChild(meteo)
+        meteo.classList.add(elem.dt_txt.split(" ")[0])
+        //heure
+        let heure = elem.dt_txt.split(" ")[1].substring(0,5)
+        createElement("p","meteo__heure",meteo,heure)
+        //logo meteo
+        let source="http://openweathermap.org/img/wn/"+elem.weather[0].icon+"@2x.png"
+        createElementImg("meteo__logo",meteo,source)
+        //description meteo
+        let description=elem.weather[0].description
+        createElement("p","meteo__description",meteo,description)
+        //temperature
+        let temperature=(elem.main.temp).toFixed(0)+ " ° "
+        createElement("p","meteo__temperature",meteo,temperature)
+        //vent
+        let wind=(elem.wind.speed*3.6).toFixed(0)+" km/h"
+        createElement("p","meteo__wind",meteo,wind)
+    }
 }
