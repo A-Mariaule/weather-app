@@ -27,7 +27,7 @@ let total_number=number_time+32
 const week=["Sun.","Mon.","Tue.","Wed.","Thu.","Fri.","Sat."]
 
 
-//creation de la météo
+//creation de la météo + ajout boutons
 button.addEventListener("click",()=>{
     main__listHeure.innerHTML=""
     header__listButton.innerHTML=""
@@ -64,28 +64,33 @@ button.addEventListener("click",()=>{
             createElement("p","meteo__wind",meteo,wind)
         }
         //create button jour
-        header__listButton.classList="header__listButton"
-        header.appendChild(header__listButton)
-        CreateButton(date)
-        let date_2=new Date(date)
-        date_2.setDate(date_2.getDate()+1)
-        CreateButton(date_2)
-        let date_3=new Date(date)
-        date_3.setDate(date_3.getDate()+2)
-        CreateButton(date_3)
-        let date_4=new Date(date)
-        date_4.setDate(date_4.getDate()+3)
-        CreateButton(date_4)
-        let date_5=new Date(date)
-        date_5.setDate(date_5.getDate()+4)
-        CreateButton(date_5)
+        CreateButtons()
     })
 })
 
+
 //////////*Fonctions*//////////////////
 
-//creation bouton jour
-function CreateButton(date){
+//creation de tout les boutons
+function CreateButtons(){
+    header__listButton.classList="header__listButton"
+    header.appendChild(header__listButton)
+    CreateOneButton(date)
+    let date_2=new Date(date)
+    date_2.setDate(date_2.getDate()+1)
+    CreateOneButton(date_2)
+    let date_3=new Date(date)
+    date_3.setDate(date_3.getDate()+2)
+    CreateOneButton(date_3)
+    let date_4=new Date(date)
+    date_4.setDate(date_4.getDate()+3)
+    CreateOneButton(date_4)
+    let date_5=new Date(date)
+    date_5.setDate(date_5.getDate()+4)
+    CreateOneButton(date_5)
+}
+//creation un bouton jour
+function CreateOneButton(date){
     let button_day=document.createElement("button")
     button_day.textContent=week[date.getDay()]
     header__listButton.appendChild(button_day)
@@ -149,7 +154,7 @@ function newdate(date){
     }
 }
 
-// gestion average
+//gestion average
 function displayAverage(average,date){
     let today=new Date()
     if(today.getDate()==date.getDate()){
@@ -177,4 +182,3 @@ function createElementImg(name,parent,src){
     parent.appendChild(item)
     item.src=src
 }
-
