@@ -69,6 +69,7 @@ function CreateButtons(){
     date_5.setDate(date_5.getDate()+4)
     CreateOneButton(date_5)
 }
+
 //creation un bouton jour
 function CreateOneButton(date){
     let button_day=document.createElement("button")
